@@ -25,7 +25,7 @@ local params = inv.parameters.prometheus_pushgateway;
               alert: 'PushgatewayDown',
               annotations: {
                 message: 'Platform pushgateway has disappeared from Prometheus target discovery.',
-                runbook_url: 'https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeletdown',
+                runbook_url: 'https://github.com/projectsyn/component-prometheus-pushgateway/tree/master/docs/modules/ROOT/pages/how-tos/runbooks/pushgatewaydown.adoc',
               },
               expr: 'absent(up{job="platform-prometheus-pushgateway"} == 1)\n',
               'for': '5m',

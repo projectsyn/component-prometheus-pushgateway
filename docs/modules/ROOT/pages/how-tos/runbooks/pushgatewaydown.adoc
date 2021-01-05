@@ -1,0 +1,20 @@
+= Alert rule: PushgatewayDown
+
+== icon:glasses[] Overview
+
+This rule checks if the Prometheus push gateway pod is up by checking whether Prometheus can currently scrape the push gateway pod's metrics endpoint.
+
+== icon:bug[] Steps for Debugging
+
+Check why the push gateway pod is down.
+Use `kubectl describe pod <pod-name>`, `kubectl events`, or `kubectl describe deploy <deployment-name>` to investigate.
+
+If the pod appears to be running fine, check if you can reach the push gateway pod from the Prometheus pod/namespace:
+
+[source,bash]
+----
+# in the Prometheus pod (or another pod in the Prometheus namespace)
+wget -O- http://<pod ip>:9091/metrics
+----
+
+If the `wget` command fails, investigate whether there's `NetworkPolicy` objects that prohibit Prometheus from accessing the push gateway pod.
