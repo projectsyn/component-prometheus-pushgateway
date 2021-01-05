@@ -1,5 +1,11 @@
 parameters:
   kapitan:
+    dependencies:
+      - type: helm
+        output_path: dependencies/prometheus-pushgateway/helmcharts/prometheus-pushgateway
+        source: https://prometheus-community.github.io/helm-charts
+        version: ${prometheus_pushgateway:charts:prometheus-pushgateway}
+        chart_name: prometheus-pushgateway
     compile:
       - input_paths:
           - prometheus-pushgateway/component/app.jsonnet
@@ -9,4 +15,12 @@ parameters:
           - prometheus-pushgateway/component/main.jsonnet
         input_type: jsonnet
         output_path: prometheus-pushgateway/
-
+        output_type: yaml
+      - input_paths:
+          - prometheus-pushgateway/helmcharts/prometheus-pushgateway
+        input_type: helm
+        output_path: prometheus-pushgateway/01_helmchart
+        helm_params:
+          release_name: platform
+          namespace: ${prometheus_pushgateway:namespace}
+        helm_values: ${prometheus_pushgateway:helm_values}

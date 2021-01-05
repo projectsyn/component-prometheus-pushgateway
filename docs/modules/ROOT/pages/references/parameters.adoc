@@ -10,10 +10,36 @@ default:: `syn-prometheus-pushgateway`
 
 The namespace in which to deploy this component.
 
+== `prometheus_rule_labels`
+
+[horizontal]
+type:: dict
+default:: `{"prometheus":"platform"}`
+
+Labels to set on the alert rule configuration for the prometheus-pushgateway itself.
+Can be used to ensure prometheus-operator picks up the `PrometheusRule` object by setting appropriate labels.
+
+== `prometheus_rule_namespace`
+
+[horizontal]
+type:: string
+default:: `${prometheus_pushgateway:namespace}`
+
+Namespace in which to deploy the `PrometheusRule` object.
+
+== `helm_values`
+
+[horizontal]
+type:: dict
+default:: `{"serviceMonitor":{"enabled":true}}`
+
+Helm values which are passed through to the Helm chart.
 
 == Example
 
 [source,yaml]
 ----
 namespace: example-namespace
+prometheus_rule_labels:
+  prometheus: platform
 ----

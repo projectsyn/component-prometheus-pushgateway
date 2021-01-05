@@ -1,3 +1,11 @@
 parameters:
   prometheus_pushgateway:
     namespace: syn-prometheus-pushgateway
+    prometheus_rule_labels:
+      prometheus: platform
+    prometheus_rule_namespace: ${prometheus_pushgateway:namespace}
+    helm_values:
+      serviceMonitor:
+        enabled: true
+    charts:
+      prometheus-pushgateway: 1.5.1
