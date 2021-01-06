@@ -31,7 +31,7 @@ Namespace in which to deploy the `PrometheusRule` object.
 
 [horizontal]
 type:: dict
-default:: `{"serviceMonitor":{"enabled":true}}`
+default:: `{"serviceMonitor":{"enabled":true, "namespace": "${prometheus_pushgateway:namespace}"}}`
 
 Helm values which are passed through to the Helm chart.
 

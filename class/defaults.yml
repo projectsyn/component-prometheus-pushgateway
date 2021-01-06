@@ -7,5 +7,6 @@ parameters:
     helm_values:
       serviceMonitor:
         enabled: true
+        namespace: ${prometheus_pushgateway:namespace}
     charts:
       prometheus-pushgateway: 1.5.1
