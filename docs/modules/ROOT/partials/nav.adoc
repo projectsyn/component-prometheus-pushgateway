@@ -1,2 +1,8 @@
 * xref:index.adoc[Home]
+
+.References
 * xref:references/parameters.adoc[Parameters]
+
+.How-to guides
+* xref:how-tos/alert-runbook.adoc[Alert runbooks]
+** xref:how-tos/runbooks/pushgatewaydown.adoc[Alert rule: PushgatewayDown]
