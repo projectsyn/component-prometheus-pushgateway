@@ -6,6 +6,7 @@ local inv = kap.inventory();
 local params = inv.parameters.prometheus_pushgateway;
 
 {
+  '00_namespace': kube.Namespace(params.namespace),
   '02_alertrule_pushgateway_job': {
     apiVersion: 'monitoring.coreos.com/v1',
     kind: 'PrometheusRule',
