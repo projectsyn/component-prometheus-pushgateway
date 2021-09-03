@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: prometheus-pushgateway
+    chart: prometheus-pushgateway-1.5.1
+    heritage: Tiller
+    release: platform
+  name: platform-prometheus-pushgateway
+  namespace: syn-prometheus-pushgateway
+spec:
+  endpoints:
+    - honorLabels: true
+      path: /metrics
+      port: http
+  namespaceSelector:
+    matchNames:
+      - syn-prometheus-pushgateway
+  selector:
+    matchLabels:
+      app: prometheus-pushgateway
+      release: platform

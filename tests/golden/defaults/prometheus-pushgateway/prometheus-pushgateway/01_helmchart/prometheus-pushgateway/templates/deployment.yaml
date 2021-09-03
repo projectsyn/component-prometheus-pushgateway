@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: prometheus-pushgateway
+    chart: prometheus-pushgateway-1.5.1
+    heritage: Tiller
+    release: platform
+  name: platform-prometheus-pushgateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-pushgateway
+      release: platform
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: prometheus-pushgateway
+        release: platform
+    spec:
+      containers:
+        - image: prom/pushgateway:v1.3.0
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /-/healthy
+              port: 9091
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+          name: pushgateway
+          ports:
+            - containerPort: 9091
+              name: metrics
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /-/ready
+              port: 9091
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+          resources: {}
+      serviceAccountName: platform-prometheus-pushgateway

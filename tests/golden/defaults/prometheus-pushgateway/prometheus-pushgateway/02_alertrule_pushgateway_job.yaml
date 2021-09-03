@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: platform
+    role: alert-rules
+  name: prometheus-pushgateway-rules
+  namespace: syn-prometheus-pushgateway
+spec:
+  groups:
+    - name: prometheus-pushgateway.rules
+      rules:
+        - alert: PushgatewayDown
+          annotations:
+            message: Platform pushgateway has disappeared from Prometheus target discovery.
+            runbook_url: https://github.com/projectsyn/component-prometheus-pushgateway/tree/master/docs/modules/ROOT/pages/how-tos/runbooks/pushgatewaydown.adoc
+          expr: 'absent(up{job="platform-prometheus-pushgateway"} == 1)
+
+            '
+          for: 5m
+          labels:
+            severity: warning
