@@ -5,8 +5,21 @@ local inv = kap.inventory();
 // The hiera parameters for the component
 local params = inv.parameters.prometheus_pushgateway;
 
+local nsLabels =
+  if inv.parameters.facts.distribution == 'openshift4' then
+    {
+      'openshift.io/cluster-monitoring': 'true',
+    }
+  else
+    {
+      SYNMonitoring: 'main',
+    };
+
 {
-  [if params.createNamespace then '00_namespace']: kube.Namespace(params.namespace),
+  [if params.createNamespace then '00_namespace']:
+    kube.Namespace(params.namespace) {
+      labels+: nsLabels,
+    },
   '02_alertrule_pushgateway_job': {
     apiVersion: 'monitoring.coreos.com/v1',
     kind: 'PrometheusRule',

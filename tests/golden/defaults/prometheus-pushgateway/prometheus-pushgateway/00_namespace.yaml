@@ -1,5 +1,7 @@
 apiVersion: v1
 kind: Namespace
+labels:
+  SYNMonitoring: main
 metadata:
   annotations: {}
   labels:
