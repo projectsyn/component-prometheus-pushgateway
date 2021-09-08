@@ -1,6 +1,7 @@
 parameters:
   prometheus_pushgateway:
     namespace: syn-prometheus-pushgateway
+    create_namespace: true
     prometheus_rule_labels:
       prometheus: platform
     prometheus_rule_namespace: ${prometheus_pushgateway:namespace}

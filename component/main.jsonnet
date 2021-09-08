@@ -5,7 +5,32 @@ local inv = kap.inventory();
 // The hiera parameters for the component
 local params = inv.parameters.prometheus_pushgateway;
 
+local rbac = import 'rbac.libsonnet';
+
+local onOpenshift = inv.parameters.facts.distribution == 'openshift4';
+
+local nsLabels =
+  if onOpenshift then
+    {
+      'openshift.io/cluster-monitoring': 'true',
+    }
+  else
+    {
+      SYNMonitoring: 'main',
+    };
+
 {
+  [if params.create_namespace then '00_namespace']:
+    kube.Namespace(params.namespace) {
+      metadata+: {
+        labels+: nsLabels,
+      },
+    },
+  local role = rbac.metrics_role('prometheus-pushgateway-metrics', params.namespace),
+  [if onOpenshift then '01_rbac']: [
+    role,
+    rbac.ocp_metrics_rolebinding('prometheus-pushgateway-metrics', params.namespace, role),
+  ],
   '02_alertrule_pushgateway_job': {
     apiVersion: 'monitoring.coreos.com/v1',
     kind: 'PrometheusRule',

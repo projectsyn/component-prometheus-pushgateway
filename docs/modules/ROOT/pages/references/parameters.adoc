@@ -10,6 +10,16 @@ default:: `syn-prometheus-pushgateway`
 
 The namespace in which to deploy this component.
 
+
+== `create_namespace`
+
+[horizontal]
+type:: boolean
+default:: `true`
+
+Whether to create the namespace given by `namespace`.
+Must be set to `false` if the Pushgateway is installed to a namespace managed by another component.
+
 == `prometheus_rule_labels`
 
 [horizontal]
