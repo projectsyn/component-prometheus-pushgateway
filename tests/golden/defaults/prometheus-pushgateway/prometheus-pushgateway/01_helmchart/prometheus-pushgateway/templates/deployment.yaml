@@ -4,7 +4,7 @@ metadata:
   labels:
     app: prometheus-pushgateway
     chart: prometheus-pushgateway-1.5.1
-    heritage: Tiller
+    heritage: Helm
     release: platform
   name: platform-prometheus-pushgateway
 spec:
