@@ -1,8 +1,4 @@
 :global:
-  componentName: prometheus-pushgateway
+  componentName: Prometheus Pushgateway
   githubUrl: https://github.com/projectsyn/component-prometheus-pushgateway
   feature_goldenTests: true
-
-docs/antora.yml:
-  name: prometheus-pushgateway
-  title: Prometheus Pushgateway
