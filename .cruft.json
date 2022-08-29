@@ -1,0 +1,21 @@
+{
+  "template": "https://github.com/projectsyn/commodore-component-template.git",
+  "commit": "e6c4fd69190db1ad12e941d578b9423d0e2f993c",
+  "checkout": "main",
+  "context": {
+    "cookiecutter": {
+      "name": "Prometheus Pushgateway",
+      "slug": "prometheus-pushgateway",
+      "parameter_key": "prometheus_pushgateway",
+      "test_cases": "defaults",
+      "add_golden": "y",
+      "add_matrix": "n",
+      "add_go_unit": "n",
+      "github_owner": "projectsyn",
+      "github_name": "component-prometheus-pushgateway",
+      "github_url": "https://github.com/projectsyn/component-prometheus-pushgateway",
+      "_template": "https://github.com/projectsyn/commodore-component-template.git"
+    }
+  },
+  "directory": null
+}
