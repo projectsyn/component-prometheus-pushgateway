@@ -1,4 +1,0 @@
-:global:
-  componentName: Prometheus Pushgateway
-  githubUrl: https://github.com/projectsyn/component-prometheus-pushgateway
-  feature_goldenTests: true
