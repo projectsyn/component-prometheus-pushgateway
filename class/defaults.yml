@@ -10,4 +10,4 @@ parameters:
         enabled: true
         namespace: ${prometheus_pushgateway:namespace}
     charts:
-      prometheus-pushgateway: 1.5.1
+      prometheus-pushgateway: 1.18.3

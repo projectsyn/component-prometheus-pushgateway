@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: prometheus-pushgateway
-    chart: prometheus-pushgateway-1.5.1
+    chart: prometheus-pushgateway-1.18.3
     heritage: Helm
     release: platform
   name: platform-prometheus-pushgateway
@@ -20,14 +20,16 @@ spec:
       annotations: {}
       labels:
         app: prometheus-pushgateway
+        chart: prometheus-pushgateway-1.18.3
+        heritage: Helm
         release: platform
     spec:
       containers:
-        - image: prom/pushgateway:v1.3.0
+        - image: prom/pushgateway:v1.4.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
-              path: /-/healthy
+              path: /-/ready
               port: 9091
             initialDelaySeconds: 10
             timeoutSeconds: 10
@@ -43,4 +45,15 @@ spec:
             initialDelaySeconds: 10
             timeoutSeconds: 10
           resources: {}
+          volumeMounts:
+            - mountPath: /data
+              name: storage-volume
+              subPath: ''
+      securityContext:
+        fsGroup: 65534
+        runAsNonRoot: true
+        runAsUser: 65534
       serviceAccountName: platform-prometheus-pushgateway
+      volumes:
+        - emptyDir: {}
+          name: storage-volume
