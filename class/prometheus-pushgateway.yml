@@ -21,6 +21,6 @@ parameters:
         input_type: helm
         output_path: prometheus-pushgateway/01_helmchart
         helm_params:
-          release_name: platform
+          name: platform
           namespace: ${prometheus_pushgateway:namespace}
         helm_values: ${prometheus_pushgateway:helm_values}
