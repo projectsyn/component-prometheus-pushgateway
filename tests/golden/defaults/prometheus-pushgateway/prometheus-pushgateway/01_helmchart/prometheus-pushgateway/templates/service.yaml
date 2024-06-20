@@ -4,7 +4,7 @@ metadata:
   annotations: {}
   labels:
     app: prometheus-pushgateway
-    chart: prometheus-pushgateway-1.5.1
+    chart: prometheus-pushgateway-1.18.3
     heritage: Helm
     release: platform
   name: platform-prometheus-pushgateway
