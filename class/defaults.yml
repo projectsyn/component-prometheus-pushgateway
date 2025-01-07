@@ -1,5 +1,7 @@
 parameters:
   prometheus_pushgateway:
+    =_metadata:
+      multi_tenant: true
     namespace: syn-prometheus-pushgateway
     create_namespace: true
     prometheus_rule_labels:
